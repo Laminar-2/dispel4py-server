@@ -17,7 +17,7 @@ public class PE extends Registry{
     Integer peId;
     @Column(unique = true)
     String peName;
-    @Column(columnDefinition = "varchar(1000)")
+    @Column(columnDefinition = "varchar(100000)")
     String peCode;
     @Column
     String description;

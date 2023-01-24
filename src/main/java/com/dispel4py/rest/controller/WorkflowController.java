@@ -5,6 +5,8 @@ import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.Workflow;
 import com.dispel4py.rest.service.WorkflowService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -53,13 +55,13 @@ public class WorkflowController {
     }
 
     @GetMapping("/pes/id/{id}")
-    public List<PE> getPEsByWorkflow(@PathVariable(value="id") Long id){
+    public Collection getPEsByWorkflow(@PathVariable(value="id") Long id){
         return workflowService.getPEsByWorkflow(id);
     }
 
 
-    @GetMapping("/pes/name/{id}")
-    public List<PE> getPEsByWorkflow(@PathVariable(value="id") String name){
+    @GetMapping("/pes/name/{name}")
+    public Collection getPEsByWorkflow(@PathVariable(value="name") String name){
         return workflowService.getPEsByWorkflow(name);
     }
 

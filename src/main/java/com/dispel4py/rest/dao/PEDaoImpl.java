@@ -25,8 +25,10 @@ public class PEDaoImpl implements PEDao{
     public PE registerPE(PE pe) {
 
         try{
-            if(getPEByName(pe.getPeName()) != null){
-                throw new EntityExistsException(PE.class, "peName", pe.getPeName());
+
+            PE check = getPEByName(pe.getPeName());
+            if( check != null){
+                throw new EntityExistsException(PE.class,"peName", pe.getPeName(),"id",Integer.toString(check.getPeId()));
             }
 
         }catch(EntityNotFoundException ex){

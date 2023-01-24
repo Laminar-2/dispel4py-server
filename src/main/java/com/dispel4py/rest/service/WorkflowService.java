@@ -3,6 +3,7 @@ package com.dispel4py.rest.service;
 import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.Workflow;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface WorkflowService {
@@ -19,6 +20,6 @@ public interface WorkflowService {
     int removeWorkflowByName(String name);
 
     int removeWorkflowByID(Long workflowId);
-    List<PE> getPEsByWorkflow(Long id);
-    List<PE> getPEsByWorkflow(String name);
+    Collection getPEsByWorkflow(Long id);
+    Collection getPEsByWorkflow(String name);
 }

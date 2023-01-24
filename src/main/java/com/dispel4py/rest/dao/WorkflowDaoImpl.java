@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -23,9 +24,11 @@ public class WorkflowDaoImpl implements WorkflowDao{
 
         try{
 
-            if(getWorkflowByName(workflow.getEntryPoint()) != null){
+            Workflow check = getWorkflowByName(workflow.getEntryPoint());
 
-                throw new EntityExistsException(Workflow.class,"entryPoint", workflow.getEntryPoint());
+            if(check != null){
+
+                throw new EntityExistsException(Workflow.class,"entryPoint", workflow.getEntryPoint(),"id",Integer.toString(check.getWorkflowId()));
             }
 
         }catch(EntityNotFoundException ex){
@@ -95,27 +98,35 @@ public class WorkflowDaoImpl implements WorkflowDao{
     }
 
     @Override
-    public List<PE> getPEsByWorkflow(Long id) {
-
-        /**
+    public Collection getPEsByWorkflow(Long id) {
         try {
 
-            TypedQuery<Workflow> typedQuery
-                    = entityManager.createQuery("SELECT u.PEs FROM Workflow u WHERE u.workflowId=:id", Workflow.class);
-            typedQuery.setParameter("id", id);
+            TypedQuery<Collection> typedQuery
+                    = entityManager.createQuery("SELECT u.PEs FROM Workflow u WHERE u.workflowId=:id", Collection.class);
+            typedQuery.setParameter("id", id.intValue());
 
-            return null;
+            return typedQuery.getResultList();
 
         }catch (NoResultException ex){
-            throw new EntityNotFoundException(Workflow.class, "entryPoint", workflowName);
+            throw new EntityNotFoundException(Workflow.class, "id", Integer.toString(id.intValue()));
         }
-         **/
-        return null;
+
     }
 
     @Override
-    public List<PE> getPEsByWorkflow(String workflowName) {
-        return null;
-    }
+    public Collection getPEsByWorkflow(String workflowName) {
 
+        try {
+
+            TypedQuery<Collection> typedQuery
+                    = entityManager.createQuery("SELECT u.PEs FROM Workflow u WHERE u.workflowName=:workflowName", Collection.class);
+            typedQuery.setParameter("workflowName", workflowName);
+
+            return typedQuery.getResultList();
+
+        }catch (NoResultException ex){
+            throw new EntityNotFoundException(Workflow.class, "workflowName", workflowName);
+        }
+
+    }
 }

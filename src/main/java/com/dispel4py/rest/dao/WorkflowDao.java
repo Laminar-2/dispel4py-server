@@ -1,10 +1,9 @@
 package com.dispel4py.rest.dao;
 
 import com.dispel4py.rest.model.PE;
-import com.dispel4py.rest.model.Registry;
 import com.dispel4py.rest.model.Workflow;
-import org.hibernate.jdbc.Work;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public interface WorkflowDao {
 
     int removeWorkflowByID(Long id);
 
-    List<PE> getPEsByWorkflow(Long id);
+    Collection getPEsByWorkflow(Long id);
 
-    List<PE> getPEsByWorkflow(String workflowName);
+    Collection getPEsByWorkflow(String workflowName);
 }

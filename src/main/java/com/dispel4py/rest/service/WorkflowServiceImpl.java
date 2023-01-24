@@ -6,6 +6,7 @@ import com.dispel4py.rest.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -74,12 +75,12 @@ public class WorkflowServiceImpl implements WorkflowService{
     }
 
     @Override
-    public List<PE> getPEsByWorkflow(Long id) {
+    public Collection getPEsByWorkflow(Long id) {
         return workflowDao.getPEsByWorkflow(id);
     }
 
     @Override
-    public List<PE> getPEsByWorkflow(String name) {
+    public Collection getPEsByWorkflow(String name) {
         return workflowDao.getPEsByWorkflow(name);
     }
 

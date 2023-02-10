@@ -17,21 +17,24 @@ public class PE extends Registry{
     Integer peId;
     @Column(unique = true)
     String peName;
-    @Column(columnDefinition = "varchar(1000)")
+    @Column(length = 5000)
     String peCode;
     @Column
     String description;
+    @Column
+    String peImports;
     @JsonIgnore
     @ManyToMany(mappedBy = "PEs")
     private List<Workflow> workflows;
 
     public PE(Integer id, String PEName, String PECode,
-              String description) {
+              String description, String peImports) {
 
         this.peId = id;
         this.peName = PEName;
         this.peCode = PECode;
         this.description = description;
+        this.peImports = peImports;
 
     }
 
@@ -78,6 +81,15 @@ public class PE extends Registry{
     public void setWorkflows(List<Workflow> workflows) {
         this.workflows = workflows;
     }
+
+    public String getPeImports() {
+        return peImports;
+    }
+
+    public void setPeImports(String peImports) {
+        this.peImports = peImports;
+    }
+
 
 
 }

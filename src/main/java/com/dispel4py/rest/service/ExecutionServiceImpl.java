@@ -1,6 +1,7 @@
 package com.dispel4py.rest.service;
 
 import com.dispel4py.rest.model.Execution;
+import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -20,6 +21,8 @@ public class ExecutionServiceImpl implements ExecutionService {
     @Override
     public String runWorkflow(Execution e) {
 
+        //e.imports will already be set from client for direct execution
+
         Long workflowId = e.getWorkflowId();
         String workflowName = e.getWorkflowName();
         Workflow wf;
@@ -27,9 +30,31 @@ public class ExecutionServiceImpl implements ExecutionService {
         if(!(workflowId == null)){
             wf = workflowService.getWorkflowByID(workflowId);
             e.setGraph(wf);
+
+            //Set import string from joining pe imports
+            String imports = "";
+            for(PE pe : wf.getPEs()){
+                String s = pe.getPeImports();
+                System.out.println("" + s);
+                if(!s.equals("")){
+                    imports = imports + "," + s;
+                }
+            }
+            e.setImports(imports);
+
         }else if(!(workflowName == null)){
             wf = workflowService.getWorkflowByName(workflowName);
             e.setGraph(wf);
+            //todo:abstract
+            String imports = "";
+            for(PE pe : wf.getPEs()){
+                String s = pe.getPeImports();
+                System.out.println("" + s);
+                if(!s.equals("")){
+                    imports = imports + "," + s;
+                }
+            }
+            e.setImports(imports);
         }
 
         System.out.println(e);

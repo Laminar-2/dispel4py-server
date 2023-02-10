@@ -65,21 +65,25 @@ public class WorkflowServiceImpl implements WorkflowService{
     }
 
     @Override
+    @Transactional
     public int removeWorkflowByName(String name) {
         return workflowDao.removeWorkflowByName(name);
     }
 
     @Override
+    @Transactional
     public int removeWorkflowByID(Long workflowId) {
         return workflowDao.removeWorkflowByID(workflowId);
     }
 
     @Override
+    @Transactional
     public Collection getPEsByWorkflow(Long id) {
         return workflowDao.getPEsByWorkflow(id);
     }
 
     @Override
+    @Transactional
     public Collection getPEsByWorkflow(String name) {
         return workflowDao.getPEsByWorkflow(name);
     }

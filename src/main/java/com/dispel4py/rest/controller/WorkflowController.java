@@ -44,12 +44,12 @@ public class WorkflowController {
         return workflowService.getWorkflowByName(name);
     }
 
-    @GetMapping("remove/id/{id}")
+    @DeleteMapping("remove/id/{id}")
     public int removeWorkflowById(@PathVariable(value="id") Long id){
         return workflowService.removeWorkflowByID(id);
     }
 
-    @GetMapping("remove/name/{name}")
+    @DeleteMapping("remove/name/{name}")
     public int removeWorkflowByName(@PathVariable(value="name") String name){
         return workflowService.removeWorkflowByName(name);
     }

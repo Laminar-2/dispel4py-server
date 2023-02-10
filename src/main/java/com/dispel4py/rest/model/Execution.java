@@ -5,28 +5,21 @@ import java.io.Serializable;
 public class Execution implements Serializable {
 
     Long workflowId;
-
     String workflowName;
     Workflow graph;
     String inputCode;
     String workflowCode;
-
-    public Integer getProcess() {
-        return process;
-    }
-
-
-
     Integer process;
-
+    String resources;
     String args;
+    String imports;
 
-
-    public Execution(Long workflowId, Workflow graph,  Integer process,String args) {
+    public Execution(Long workflowId, Workflow graph,  Integer process,String args, String imports) {
         this.workflowId = workflowId;
         this.graph = graph;
         this.process = process;
         this.args = args;
+        this.imports = imports;
     }
 
     public Long getWorkflowId() {
@@ -80,6 +73,27 @@ public class Execution implements Serializable {
     public void setArgs(String args) {
         this.args = args;
     }
+
+    public Integer getProcess() {
+        return process;
+    }
+
+    public String getResources() {
+        return resources;
+    }
+
+    public void setResources(String resources) {
+        this.resources = resources;
+    }
+
+    public String getImports() {
+        return imports;
+    }
+
+    public void setImports(String imports) {
+        this.imports = imports;
+    }
+
 
     @Override
     public String toString() {

@@ -6,7 +6,7 @@ import com.dispel4py.rest.service.PEService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/execution")
+@RequestMapping(path="/execution/{user}")
 public class ExecutionController {
     private ExecutionService execService;
 
@@ -15,7 +15,7 @@ public class ExecutionController {
     }
 
     @RequestMapping(value = "/run", method = RequestMethod.POST)
-    public String run(@RequestBody Execution e) throws EntityNotFoundException {
-        return execService.runWorkflow(e);
+    public String run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
+        return execService.runWorkflow(e,user);
     }
 }

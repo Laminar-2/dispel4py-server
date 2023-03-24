@@ -8,12 +8,13 @@ import java.util.List;
  */
 @Entity
 @Table(name = "workflows")
-public class Workflow extends Registry{
+public class Workflow extends Registry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column
     Integer workflowId;
+
     @Column
     String workflowName;
 
@@ -33,14 +34,19 @@ public class Workflow extends Registry{
             inverseJoinColumns = @JoinColumn(name = "workflow_id"))
     List<PE> PEs;
 
+    @ManyToMany
+    @JoinColumn(name = "userId",nullable = false)
+    List<User> user;
 
-    public Workflow(Integer id, String workflowName, String workflowCode, String entryPoint, String description, List<PE> PEs) {
+
+    public Workflow(Integer id, String workflowName, String workflowCode, String entryPoint, String description, List<PE> PEs, List<User> user) {
         this.workflowId = id;
         this.workflowName = workflowName;
         this.workflowCode = workflowCode;
         this.entryPoint = entryPoint;
         this.description = description;
         this.PEs = PEs;
+        this.user = user;
     }
 
 
@@ -96,6 +102,13 @@ public class Workflow extends Registry{
         this.PEs = PEs;
     }
 
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
     @Override
     public String toString() {
         return "Workflow(" + this.getWorkflowId() + "\n" + this.getWorkflowName()

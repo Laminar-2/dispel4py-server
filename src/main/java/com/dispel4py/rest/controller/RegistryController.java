@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/registry")
+@RequestMapping(path="/registry/{user}")
 public class RegistryController {
 
     private RegistryService registryService;
@@ -17,12 +17,12 @@ public class RegistryController {
     }
 
     @GetMapping("/search/{search}/type/{type}")
-    public List<Registry> search(@PathVariable(value="search") String search, @PathVariable(value="type") String type){
-        return registryService.search(search,type);
+    public List<Registry> search(@PathVariable(value="search") String search, @PathVariable(value="type") String type, @PathVariable String user){
+        return registryService.search(search,type,user);
     }
     @GetMapping("/all")
-    public List<Registry> getAll(){
-        return registryService.getAll();
+    public List<Registry> getAll(@PathVariable String user){
+        return registryService.getAll(user);
     }
 
 }

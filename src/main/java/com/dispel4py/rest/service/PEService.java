@@ -8,17 +8,13 @@ import java.util.List;
  */
 public interface PEService {
 
-    PE getPEByName(String peName);
-    PE getPEbyID(Long id);
-    PE registerPE(PE pe);
+    PE getPEByName(String peName,String user);
+    PE getPEbyID(Long id,String user);
+    PE registerPE(PE pe, String user);
+    List<PE> getAllPEs(String user);
 
-    List<PE> getAllPEs();
-
-    int removePEbyID(Long id);
-    int removePEByName(String peName);
-
-    //getPEsbyWorkflow();
-
+    int removePEbyID(Long id,String user);
+    int removePEByName(String peName,String user);
 
 
 

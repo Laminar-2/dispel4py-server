@@ -19,7 +19,7 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public String runWorkflow(Execution e) {
+    public String runWorkflow(Execution e, String user) {
 
         //e.imports will already be set from client for direct execution
 
@@ -28,7 +28,7 @@ public class ExecutionServiceImpl implements ExecutionService {
         Workflow wf;
 
         if(!(workflowId == null)){
-            wf = workflowService.getWorkflowByID(workflowId);
+            wf = workflowService.getWorkflowByID(workflowId,user);
             e.setGraph(wf);
 
             //Set import string from joining pe imports
@@ -43,7 +43,7 @@ public class ExecutionServiceImpl implements ExecutionService {
             e.setImports(imports);
 
         }else if(!(workflowName == null)){
-            wf = workflowService.getWorkflowByName(workflowName);
+            wf = workflowService.getWorkflowByName(workflowName,user);
             e.setGraph(wf);
             //todo:abstract
             String imports = "";

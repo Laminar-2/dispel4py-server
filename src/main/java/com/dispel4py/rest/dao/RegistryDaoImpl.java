@@ -17,26 +17,26 @@ public class RegistryDaoImpl implements  RegistryDao{
     }
 
     @Override
-    public List<Registry> search(String search, String type) {
+    public List<Registry> search(String search, String type, String user) {
 
         ArrayList<Registry> results = new ArrayList<>();
         type = type.toLowerCase();
 
         if(type.equals("both")){
 
-            results.addAll(peDao.searchPE(search));
-            results.addAll(workflowDao.searchWorkflow(search));
+            results.addAll(peDao.searchPE(search,user));
+            results.addAll(workflowDao.searchWorkflow(search,user));
 
             return results;
 
         }else if (type.equals("pe")){
 
-            results.addAll(peDao.searchPE(search));
+            results.addAll(peDao.searchPE(search,user));
             return results;
 
         }else if (type.equals("workflow")){
 
-            results.addAll(workflowDao.searchWorkflow(search));
+            results.addAll(workflowDao.searchWorkflow(search,user));
             return results;
 
         }
@@ -45,12 +45,12 @@ public class RegistryDaoImpl implements  RegistryDao{
     }
 
     @Override
-    public List<Registry> getAll() {
+    public List<Registry> getAll(String user) {
 
         ArrayList<Registry> results = new ArrayList<>();
 
-        results.addAll(peDao.getAllPEs());
-        results.addAll(workflowDao.getAllWorkflows());
+        results.addAll(peDao.getAllPEs(user));
+        results.addAll(workflowDao.getAllWorkflows(user));
 
         return results;
 

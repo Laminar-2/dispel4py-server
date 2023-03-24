@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import static org.springframework.http.HttpStatus.CONFLICT;
 
@@ -36,9 +37,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(javax.persistence.EntityExistsException.class)
     protected ResponseEntity<Object> handleEntityExists(javax.persistence.EntityExistsException ex) {
-        return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, ex.getMessage(),ex));
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    protected ResponseEntity<Object> handleUnauthorized(UnauthorizedException ex) {
+        return buildResponseEntity(new ApiError(UNAUTHORIZED, ex.getMessage(),ex));
+    }
+    @ExceptionHandler(AuthenticationException.class)
+    protected ResponseEntity<Object> handleAuth(AuthenticationException ex) {
+        ApiError apiError = new ApiError(UNAUTHORIZED,ex.getMessage(),ex);
+        return buildResponseEntity(apiError);
+    }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());

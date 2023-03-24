@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface RegistryDao {
 
-    List<Registry> search(String search, String type);
+    List<Registry> search(String search, String type,String user);
 
-    List <Registry> getAll();
+    List <Registry> getAll(String user);
 }

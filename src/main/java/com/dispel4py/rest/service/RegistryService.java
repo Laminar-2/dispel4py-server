@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface RegistryService {
 
-    List<Registry> search(String search, String type);
-    List<Registry> getAll();
+    List<Registry> search(String search, String type, String user);
+    List<Registry> getAll(String user);
 }

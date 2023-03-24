@@ -21,12 +21,12 @@ public class RegistryServiceImpl implements RegistryService{
 
     @Override
     @Transactional
-    public List<Registry> search(String search, String type) {
-        return registryDao.search(search,type);
+    public List<Registry> search(String search, String type,String user) {
+        return registryDao.search(search,type,user);
     }
 
     @Override
-    public List<Registry> getAll() {
-        return registryDao.getAll();
+    public List<Registry> getAll(String user) {
+        return registryDao.getAll(user);
     }
 }

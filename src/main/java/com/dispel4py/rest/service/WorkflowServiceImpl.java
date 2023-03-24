@@ -1,11 +1,14 @@
 package com.dispel4py.rest.service;
 import com.dispel4py.rest.dao.PEDao;
+import com.dispel4py.rest.dao.UserDao;
 import com.dispel4py.rest.dao.WorkflowDao;
 import com.dispel4py.rest.model.PE;
+import com.dispel4py.rest.model.User;
 import com.dispel4py.rest.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,25 +22,38 @@ public class WorkflowServiceImpl implements WorkflowService{
     WorkflowDao workflowDao;
     PEDao peDao;
 
+    UserDao userDao;
+
     @Autowired
-    public WorkflowServiceImpl(WorkflowDao workflowDao, PEDao peDao) {
+    public WorkflowServiceImpl(WorkflowDao workflowDao, PEDao peDao, UserDao userDao) {
         this.workflowDao = workflowDao;
         this.peDao = peDao;
+        this.userDao = userDao;
     }
 
     @Override
     @Transactional
-    public Workflow registerWorkflow(Workflow workflow) {
-        return workflowDao.registerWorkflow(workflow);
+    public Workflow registerWorkflow(Workflow workflow, String user) {
+
+        User owner = userDao.getUserByName(user);
+
+        return workflowDao.registerWorkflow(workflow, owner);
     }
 
     @Override
     @Transactional
-    public Workflow assignPEtoWorkflow(Long peId, Long workflowId) {
+    public Workflow assignPEtoWorkflow(Long peId, Long workflowId, String user) {
+
+        //todo: only assign if new
+
         List<PE> PESet = null;
+        Workflow workflow = workflowDao.getWorkflowByID(workflowId,user);
+        PE pe = peDao.getPEbyId(peId, user);
 
-        Workflow workflow = workflowDao.getWorkflowByID(workflowId);
-        PE pe = peDao.getPEbyId(peId);
+        if(workflow.getPEs().contains(pe)){
+            return workflow;
+        }
+
         PESet = workflow.getPEs();
         PESet.add(pe);
         workflow.setPEs(PESet);
@@ -48,44 +64,50 @@ public class WorkflowServiceImpl implements WorkflowService{
 
     @Override
     @Transactional
-    public List<Workflow> getAllWorkflows() {
-        return workflowDao.getAllWorkflows();
+    public List<Workflow> getAllWorkflows(String user) {
+        return workflowDao.getAllWorkflows(user);
     }
 
     @Override
     @Transactional
-    public Workflow getWorkflowByID(Long workflowId) {
-        return workflowDao.getWorkflowByID(workflowId);
+    public Workflow getWorkflowByID(Long workflowId, String user) {
+        return workflowDao.getWorkflowByID(workflowId,user);
     }
 
     @Override
     @Transactional
-    public Workflow getWorkflowByName(String name) {
-        return workflowDao.getWorkflowByName(name);
+    public Workflow getWorkflowByName(String name, String user) {
+        return workflowDao.getWorkflowByName(name,user);
     }
 
     @Override
     @Transactional
-    public int removeWorkflowByName(String name) {
-        return workflowDao.removeWorkflowByName(name);
+    public int removeWorkflowByName(String name, String user) {
+
+        User owner = userDao.getUserByName(user);
+
+        return workflowDao.removeWorkflowByName(name,owner);
     }
 
     @Override
     @Transactional
-    public int removeWorkflowByID(Long workflowId) {
-        return workflowDao.removeWorkflowByID(workflowId);
+    public int removeWorkflowByID(Long workflowId, String user) {
+
+        User owner = userDao.getUserByName(user);
+
+        return workflowDao.removeWorkflowByID(workflowId,owner);
     }
 
     @Override
     @Transactional
-    public Collection getPEsByWorkflow(Long id) {
-        return workflowDao.getPEsByWorkflow(id);
+    public Collection getPEsByWorkflow(Long id, String user) {
+        return workflowDao.getPEsByWorkflow(id,user);
     }
 
     @Override
     @Transactional
-    public Collection getPEsByWorkflow(String name) {
-        return workflowDao.getPEsByWorkflow(name);
+    public Collection getPEsByWorkflow(String name, String user) {
+        return workflowDao.getPEsByWorkflow(name,user);
     }
 
 

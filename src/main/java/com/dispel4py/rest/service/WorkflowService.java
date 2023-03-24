@@ -1,25 +1,28 @@
 package com.dispel4py.rest.service;
 
 import com.dispel4py.rest.model.PE;
+import com.dispel4py.rest.model.User;
 import com.dispel4py.rest.model.Workflow;
 
 import java.util.Collection;
 import java.util.List;
 
 public interface WorkflowService {
-    Workflow registerWorkflow(Workflow workflow);
+    Workflow registerWorkflow(Workflow workflow, String user);
 
-    Workflow assignPEtoWorkflow(Long peId, Long workflowId);
+    Workflow assignPEtoWorkflow(Long peId, Long workflowId, String user);
 
-    List<Workflow> getAllWorkflows();
+    List<Workflow> getAllWorkflows(String user);
 
-    Workflow getWorkflowByID(Long workflowId);
+    Workflow getWorkflowByID(Long workflowId, String user);
 
-    Workflow getWorkflowByName(String name);
+    Workflow getWorkflowByName(String name, String user);
 
-    int removeWorkflowByName(String name);
+    int removeWorkflowByName(String name, String user);
 
-    int removeWorkflowByID(Long workflowId);
-    Collection getPEsByWorkflow(Long id);
-    Collection getPEsByWorkflow(String name);
+    int removeWorkflowByID(Long workflowId, String user);
+
+    Collection getPEsByWorkflow(Long id, String user);
+
+    Collection getPEsByWorkflow(String name, String user);
 }

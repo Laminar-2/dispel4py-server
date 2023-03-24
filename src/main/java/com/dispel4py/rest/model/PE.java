@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "processing_elements")
-public class PE extends Registry{
+public class PE extends Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column
@@ -27,14 +27,19 @@ public class PE extends Registry{
     @ManyToMany(mappedBy = "PEs")
     private List<Workflow> workflows;
 
+    @ManyToMany
+    @JoinColumn(name = "userId",nullable = false)
+    List<User> user;
+
     public PE(Integer id, String PEName, String PECode,
-              String description, String peImports) {
+              String description, String peImports, List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
         this.peCode = PECode;
         this.description = description;
         this.peImports = peImports;
+        this.user = user;
 
     }
 
@@ -90,6 +95,19 @@ public class PE extends Registry{
         this.peImports = peImports;
     }
 
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "PE(" + this.getPeId() + "\n" + this.getPeName()
+                + ")";
+    }
 
 
 }

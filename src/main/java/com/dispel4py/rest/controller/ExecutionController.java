@@ -1,14 +1,14 @@
 package com.dispel4py.rest.controller;
+
 import com.dispel4py.rest.error.EntityNotFoundException;
 import com.dispel4py.rest.model.Execution;
 import com.dispel4py.rest.service.ExecutionService;
-import com.dispel4py.rest.service.PEService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/execution/{user}")
+@RequestMapping(path = "/execution/{user}")
 public class ExecutionController {
-    private ExecutionService execService;
+    private final ExecutionService execService;
 
     public ExecutionController(ExecutionService execService) {
         this.execService = execService;
@@ -16,6 +16,6 @@ public class ExecutionController {
 
     @RequestMapping(value = "/run", method = RequestMethod.POST)
     public String run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
-        return execService.runWorkflow(e,user);
+        return execService.runWorkflow(e, user);
     }
 }

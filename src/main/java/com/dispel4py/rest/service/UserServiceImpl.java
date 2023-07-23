@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         if (password.equals(user.getPassword())) {
             return check;
         } else {
-            throw new AuthenticationException(User.class,"password",user.getPassword());
+            throw new AuthenticationException(User.class, "password", user.getPassword());
         }
 
     }

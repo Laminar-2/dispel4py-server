@@ -1,11 +1,14 @@
 package com.dispel4py.rest.dao;
+
 import com.dispel4py.rest.model.Registry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
-public class RegistryDaoImpl implements  RegistryDao{
+public class RegistryDaoImpl implements RegistryDao {
 
     PEDao peDao;
     WorkflowDao workflowDao;
@@ -22,26 +25,26 @@ public class RegistryDaoImpl implements  RegistryDao{
         ArrayList<Registry> results = new ArrayList<>();
         type = type.toLowerCase();
 
-        if(type.equals("both")){
+        if (type.equals("both")) {
 
-            results.addAll(peDao.searchPE(search,user));
-            results.addAll(workflowDao.searchWorkflow(search,user));
+            results.addAll(peDao.searchPE(search, user));
+            results.addAll(workflowDao.searchWorkflow(search, user));
 
             return results;
 
-        }else if (type.equals("pe")){
+        } else if (type.equals("pe")) {
 
-            results.addAll(peDao.searchPE(search,user));
+            results.addAll(peDao.searchPE(search, user));
             return results;
 
-        }else if (type.equals("workflow")){
+        } else if (type.equals("workflow")) {
 
-            results.addAll(workflowDao.searchWorkflow(search,user));
+            results.addAll(workflowDao.searchWorkflow(search, user));
             return results;
 
         }
 
-        return null;//todo: some exception
+        return null;
     }
 
     @Override

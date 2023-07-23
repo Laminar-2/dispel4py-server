@@ -1,7 +1,5 @@
 package com.dispel4py.rest.service;
 
-import com.dispel4py.rest.model.PE;
-import com.dispel4py.rest.model.User;
 import com.dispel4py.rest.model.Workflow;
 
 import java.util.Collection;

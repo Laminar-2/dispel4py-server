@@ -1,4 +1,5 @@
 package com.dispel4py.rest.service;
+
 import com.dispel4py.rest.dao.PEDao;
 import com.dispel4py.rest.dao.UserDao;
 import com.dispel4py.rest.dao.WorkflowDao;
@@ -7,8 +8,8 @@ import com.dispel4py.rest.model.User;
 import com.dispel4py.rest.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 
 @Service
-public class WorkflowServiceImpl implements WorkflowService{
+public class WorkflowServiceImpl implements WorkflowService {
 
     WorkflowDao workflowDao;
     PEDao peDao;
@@ -44,13 +45,11 @@ public class WorkflowServiceImpl implements WorkflowService{
     @Transactional
     public Workflow assignPEtoWorkflow(Long peId, Long workflowId, String user) {
 
-        //todo: only assign if new
-
         List<PE> PESet = null;
-        Workflow workflow = workflowDao.getWorkflowByID(workflowId,user);
+        Workflow workflow = workflowDao.getWorkflowByID(workflowId, user);
         PE pe = peDao.getPEbyId(peId, user);
 
-        if(workflow.getPEs().contains(pe)){
+        if (workflow.getPEs().contains(pe)) {
             return workflow;
         }
 
@@ -59,7 +58,7 @@ public class WorkflowServiceImpl implements WorkflowService{
         workflow.setPEs(PESet);
         workflowDao.persist(workflow);
 
-        return  workflow;
+        return workflow;
     }
 
     @Override
@@ -71,13 +70,13 @@ public class WorkflowServiceImpl implements WorkflowService{
     @Override
     @Transactional
     public Workflow getWorkflowByID(Long workflowId, String user) {
-        return workflowDao.getWorkflowByID(workflowId,user);
+        return workflowDao.getWorkflowByID(workflowId, user);
     }
 
     @Override
     @Transactional
     public Workflow getWorkflowByName(String name, String user) {
-        return workflowDao.getWorkflowByName(name,user);
+        return workflowDao.getWorkflowByName(name, user);
     }
 
     @Override
@@ -86,7 +85,7 @@ public class WorkflowServiceImpl implements WorkflowService{
 
         User owner = userDao.getUserByName(user);
 
-        return workflowDao.removeWorkflowByName(name,owner);
+        return workflowDao.removeWorkflowByName(name, owner);
     }
 
     @Override
@@ -95,19 +94,19 @@ public class WorkflowServiceImpl implements WorkflowService{
 
         User owner = userDao.getUserByName(user);
 
-        return workflowDao.removeWorkflowByID(workflowId,owner);
+        return workflowDao.removeWorkflowByID(workflowId, owner);
     }
 
     @Override
     @Transactional
     public Collection getPEsByWorkflow(Long id, String user) {
-        return workflowDao.getPEsByWorkflow(id,user);
+        return workflowDao.getPEsByWorkflow(id, user);
     }
 
     @Override
     @Transactional
     public Collection getPEsByWorkflow(String name, String user) {
-        return workflowDao.getPEsByWorkflow(name,user);
+        return workflowDao.getPEsByWorkflow(name, user);
     }
 
 

@@ -3,7 +3,6 @@ package com.dispel4py.rest.dao;
 import com.dispel4py.rest.error.EntityExistsException;
 import com.dispel4py.rest.error.EntityNotFoundException;
 import com.dispel4py.rest.error.UnauthorizedException;
-import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.User;
 import com.dispel4py.rest.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Repository
 public class WorkflowDaoImpl implements WorkflowDao {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public WorkflowDaoImpl(EntityManager entityManager) {
@@ -138,12 +137,12 @@ public class WorkflowDaoImpl implements WorkflowDao {
 
         Workflow workflowToRemove = getWorkflowByName(workflowName, owner.getUserName());
 
-        if(workflowToRemove.getUser().size() > 1){
+        if (workflowToRemove.getUser().size() > 1) {
 
             workflowToRemove.getUser().remove(owner);
             persist(workflowToRemove);
 
-        }else{
+        } else {
             entityManager.remove(workflowToRemove);
         }
 
@@ -156,12 +155,12 @@ public class WorkflowDaoImpl implements WorkflowDao {
 
         Workflow workflowToRemove = getWorkflowByID(id, owner.getUserName());
 
-        if(workflowToRemove.getUser().size() > 1){
+        if (workflowToRemove.getUser().size() > 1) {
 
             workflowToRemove.getUser().remove(owner);
             persist(workflowToRemove);
 
-        }else{
+        } else {
             entityManager.remove(workflowToRemove);
         }
 

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Repository
 public class PEDaoImpl implements PEDao {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public PEDaoImpl(EntityManager entityManager) {
@@ -92,7 +92,7 @@ public class PEDaoImpl implements PEDao {
 
         PE pe = entityManager.find(PE.class, id.intValue());
 
-        if(pe == null){
+        if (pe == null) {
             throw new EntityNotFoundException(PE.class, "id", id.toString());
         }
 
@@ -113,12 +113,12 @@ public class PEDaoImpl implements PEDao {
 
         PE peToRemove = getPEbyId(id, owner.getUserName());
 
-        if(peToRemove.getUser().size() > 1){
+        if (peToRemove.getUser().size() > 1) {
 
             peToRemove.getUser().remove(owner);
             persist(peToRemove);
 
-        }else{
+        } else {
             entityManager.remove(peToRemove);
         }
 
@@ -130,12 +130,12 @@ public class PEDaoImpl implements PEDao {
 
         PE peToRemove = getPEByName(peName, owner.getUserName());
 
-        if(peToRemove.getUser().size() > 1){
+        if (peToRemove.getUser().size() > 1) {
 
             peToRemove.getUser().remove(owner);
             persist(peToRemove);
 
-        }else{
+        } else {
             entityManager.remove(peToRemove);
         }
 

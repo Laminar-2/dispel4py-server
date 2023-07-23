@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class EntityExistsException extends RuntimeException{
+public class EntityExistsException extends RuntimeException {
 
 
     public EntityExistsException(Class clazz, String... searchParamsMap) {

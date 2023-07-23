@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class RegistryServiceImpl implements RegistryService{
+public class RegistryServiceImpl implements RegistryService {
 
     RegistryDao registryDao;
 
@@ -21,8 +21,8 @@ public class RegistryServiceImpl implements RegistryService{
 
     @Override
     @Transactional
-    public List<Registry> search(String search, String type,String user) {
-        return registryDao.search(search,type,user);
+    public List<Registry> search(String search, String type, String user) {
+        return registryDao.search(search, type, user);
     }
 
     @Override

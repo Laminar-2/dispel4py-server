@@ -23,16 +23,21 @@ public class PE extends Registry {
     String description;
     @Column
     String peImports;
+    @Column(length = 20000)
+    String codeEmbedding;
+    @Column(length = 20000)
+    String descEmbedding;
     @JsonIgnore
     @ManyToMany(mappedBy = "PEs")
     private List<Workflow> workflows;
 
     @ManyToMany
-    @JoinColumn(name = "userId",nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     List<User> user;
 
     public PE(Integer id, String PEName, String PECode,
-              String description, String peImports, List<User> user) {
+              String description, String peImports,
+              String codeEmbeddings, String descEmbeddings,List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
@@ -40,6 +45,8 @@ public class PE extends Registry {
         this.description = description;
         this.peImports = peImports;
         this.user = user;
+        this.codeEmbedding = codeEmbeddings;
+        this.descEmbedding = descEmbeddings;
 
     }
 
@@ -101,6 +108,22 @@ public class PE extends Registry {
 
     public void setUser(List<User> user) {
         this.user = user;
+    }
+
+    public String getCodeEmbedding() {
+        return codeEmbedding;
+    }
+
+    public void setCodeEmbedding(String codeEmbeddings) {
+        this.codeEmbedding = codeEmbeddings;
+    }
+
+    public String getDescEmbedding() {
+        return descEmbedding;
+    }
+
+    public void setDescEmbedding(String descEmbeddings) {
+        this.descEmbedding = descEmbeddings;
     }
 
     @Override

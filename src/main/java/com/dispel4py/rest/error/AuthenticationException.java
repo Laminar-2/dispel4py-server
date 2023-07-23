@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class AuthenticationException extends RuntimeException{
+public class AuthenticationException extends RuntimeException {
 
     public AuthenticationException(Class clazz, String... searchParamsMap) {
         super(com.dispel4py.rest.error.AuthenticationException.generateMessage(clazz.getSimpleName(), toMap(String.class, String.class, searchParamsMap)));

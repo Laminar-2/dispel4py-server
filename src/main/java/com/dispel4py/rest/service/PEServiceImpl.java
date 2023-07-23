@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,7 +39,7 @@ public class PEServiceImpl implements PEService {
     @Override
     @Transactional
     public PE getPEByName(String peName, String user) {
-        return PEDao.getPEByName(peName, user); //todo: handle multiple PEs
+        return PEDao.getPEByName(peName, user);
     }
 
     @Override

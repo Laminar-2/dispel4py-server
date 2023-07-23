@@ -35,7 +35,7 @@ public class Workflow extends Registry {
     List<PE> PEs;
 
     @ManyToMany
-    @JoinColumn(name = "userId",nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     List<User> user;
 
 
@@ -109,6 +109,7 @@ public class Workflow extends Registry {
     public void setUser(List<User> user) {
         this.user = user;
     }
+
     @Override
     public String toString() {
         return "Workflow(" + this.getWorkflowId() + "\n" + this.getWorkflowName()

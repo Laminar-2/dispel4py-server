@@ -14,7 +14,7 @@ public class Execution implements Serializable {
     String args;
     String imports;
 
-    public Execution(Long workflowId, Workflow graph,  Integer process,String args, String imports) {
+    public Execution(Long workflowId, Workflow graph, Integer process, String args, String imports) {
         this.workflowId = workflowId;
         this.graph = graph;
         this.process = process;

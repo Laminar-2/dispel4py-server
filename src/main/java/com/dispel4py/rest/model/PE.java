@@ -3,6 +3,9 @@ package com.dispel4py.rest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
+import org.hibernate.type.descriptor.sql.LongVarcharTypeDescriptor;
+
 import java.util.List;
 
 /**
@@ -26,7 +29,7 @@ public class PE extends Registry {
     @Column(length = 20000)
     byte[] codeEmbedding;
     @Column(length = 20000)
-    String descEmbedding;
+    LongVarcharTypeDescriptor descEmbedding;
     @JsonIgnore
     @ManyToMany(mappedBy = "PEs")
     private List<Workflow> workflows;
@@ -37,7 +40,7 @@ public class PE extends Registry {
 
     public PE(Integer id, String PEName, String PECode,
               String description, String peImports,
-              byte[] codeEmbeddings, String descEmbeddings,List<User> user) {
+              byte[] codeEmbeddings, LongVarcharTypeDescriptor descEmbeddings,List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
@@ -118,11 +121,11 @@ public class PE extends Registry {
         this.codeEmbedding = codeEmbeddings;
     }
 
-    public String getDescEmbedding() {
+    public LongVarcharTypeDescriptor getDescEmbedding() {
         return descEmbedding;
     }
 
-    public void setDescEmbedding(String descEmbeddings) {
+    public void setDescEmbedding(LongVarcharTypeDescriptor descEmbeddings) {
         this.descEmbedding = descEmbeddings;
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/registry/{user}/pe/")
+@RequestMapping(path = "/registry/{user}/pe")
 public class PEController {
 
     private final PEService peService;

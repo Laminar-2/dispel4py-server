@@ -24,7 +24,7 @@ public class PE extends Registry {
     @Column
     String peImports;
     @Column(length = 20000)
-    String codeEmbedding;
+    byte[] codeEmbedding;
     @Column(length = 20000)
     String descEmbedding;
     @JsonIgnore
@@ -37,7 +37,7 @@ public class PE extends Registry {
 
     public PE(Integer id, String PEName, String PECode,
               String description, String peImports,
-              String codeEmbeddings, String descEmbeddings,List<User> user) {
+              byte[] codeEmbeddings, String descEmbeddings,List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
@@ -110,11 +110,11 @@ public class PE extends Registry {
         this.user = user;
     }
 
-    public String getCodeEmbedding() {
+    public byte[] getCodeEmbedding() {
         return codeEmbedding;
     }
 
-    public void setCodeEmbedding(String codeEmbeddings) {
+    public void setCodeEmbedding(byte[] codeEmbeddings) {
         this.codeEmbedding = codeEmbeddings;
     }
 

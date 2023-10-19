@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.hibernate.type.descriptor.sql.LongVarcharTypeDescriptor;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class PE extends Registry {
 
     public PE(Integer id, String PEName, String PECode,
               String description, String peImports,
-              byte[] codeEmbeddings, LongVarcharTypeDescriptor descEmbeddings,List<User> user) {
+              String codeEmbeddings, LongVarcharTypeDescriptor descEmbeddings,List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
@@ -48,7 +49,12 @@ public class PE extends Registry {
         this.description = description;
         this.peImports = peImports;
         this.user = user;
-        this.codeEmbedding = codeEmbeddings;
+        try {
+            this.codeEmbedding = codeEmbeddings.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("Unsupported encoding type 'utf-8'");
+            System.exit(1);
+        }
         this.descEmbedding = descEmbeddings;
 
     }

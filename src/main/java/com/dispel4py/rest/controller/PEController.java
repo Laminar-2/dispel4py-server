@@ -5,6 +5,8 @@ import com.dispel4py.rest.error.EntityNotFoundException;
 import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.service.PEService;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class PEController {
 
     private final PEService peService;
+    private static final Logger logger = LoggerFactory.getLogger(PEController.class);
 
     public PEController(PEService peService) {
         this.peService = peService;
@@ -20,12 +23,12 @@ public class PEController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public PE register(@RequestBody PE pe, @PathVariable String user) throws EntityExistsException {
-        System.out.println("Debug: Hit Request Mapping with " + pe.getPeName());
+        logger.warn("Debug: Hit Request Mapping with " + pe.getPeName());
         try {
             return peService.registerPE(pe, user);
         } catch (Exception e) {
-            System.out.println("Caught exception: " + e.getMessage());
-            System.out.println(e.getStackTrace());
+            logger.error("Caught exception: " + e.getMessage());
+            logger.error(e.getStackTrace().toString());
             throw e;
         }
     }

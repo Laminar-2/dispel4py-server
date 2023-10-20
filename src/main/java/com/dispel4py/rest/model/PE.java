@@ -119,12 +119,23 @@ public class PE extends Registry {
         this.user = user;
     }
 
-    public byte[] getCodeEmbedding() {
-        return codeEmbedding;
+    public String getCodeEmbedding() {
+        try {
+            return new String(codeEmbedding, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("Unsupported encoding type 'utf-8'");
+            System.exit(1);
+        }
+        return "error";
     }
 
-    public void setCodeEmbedding(byte[] codeEmbeddings) {
-        this.codeEmbedding = codeEmbeddings;
+    public void setCodeEmbedding(String codeEmbeddings) {
+        try {
+            this.codeEmbedding = codeEmbeddings.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("Unsupported encoding type 'utf-8'");
+            System.exit(1);
+        }
     }
 
     public LongVarcharTypeDescriptor getDescEmbedding() {

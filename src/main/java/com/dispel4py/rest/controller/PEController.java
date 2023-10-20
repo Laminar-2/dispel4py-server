@@ -20,7 +20,14 @@ public class PEController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public PE register(@RequestBody PE pe, @PathVariable String user) throws EntityExistsException {
-        return peService.registerPE(pe, user);
+        System.out.println("Debug: Hit Request Mapping with " + pe.getPeName());
+        try {
+            return peService.registerPE(pe, user);
+        } catch (Exception e) {
+            System.out.println("Caught exception: " + e.getMessage());
+            System.out.println(e.getStackTrace());
+            throw e;
+        }
     }
 
     @GetMapping("/id/{id}")

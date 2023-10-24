@@ -18,7 +18,7 @@ public class PEController {
         this.peService = peService;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
+    @PostMapping(value = "/add", consumes = "application/json")
     public PE register(@RequestBody PE pe, @PathVariable String user) throws EntityExistsException {
         //PE demoPe = new PE();
         //demoPe.setPeName("Demo PE"); 

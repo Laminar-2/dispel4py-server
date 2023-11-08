@@ -3,10 +3,6 @@ package com.dispel4py.rest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-
-import org.hibernate.type.descriptor.sql.LongVarcharTypeDescriptor;
-
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -27,10 +23,12 @@ public class PE extends Registry {
     String description;
     @Column
     String peImports;
+    @Lob
     @Column(length = 20000)
-    byte[] codeEmbedding;
+    String codeEmbedding;
+    @Lob
     @Column(length = 20000)
-    LongVarcharTypeDescriptor descEmbedding;
+    String descEmbedding;
     @JsonIgnore
     @ManyToMany(mappedBy = "PEs")
     private List<Workflow> workflows;
@@ -41,7 +39,7 @@ public class PE extends Registry {
 
     public PE(Integer id, String PEName, String PECode,
               String description, String peImports,
-              String codeEmbeddings, LongVarcharTypeDescriptor descEmbeddings,List<User> user) {
+              String codeEmbeddings, String descEmbeddings,List<User> user) {
 
         this.peId = id;
         this.peName = PEName;
@@ -49,12 +47,7 @@ public class PE extends Registry {
         this.description = description;
         this.peImports = peImports;
         this.user = user;
-        try {
-            this.codeEmbedding = codeEmbeddings.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("Unsupported encoding type 'utf-8'");
-            System.exit(1);
-        }
+        this.codeEmbedding = codeEmbeddings;
         this.descEmbedding = descEmbeddings;
 
     }
@@ -120,29 +113,18 @@ public class PE extends Registry {
     }
 
     public String getCodeEmbedding() {
-        try {
-            return new String(codeEmbedding, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("Unsupported encoding type 'utf-8'");
-            System.exit(1);
-        }
-        return "error";
+        return codeEmbedding;
     }
 
     public void setCodeEmbedding(String codeEmbeddings) {
-        try {
-            this.codeEmbedding = codeEmbeddings.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("Unsupported encoding type 'utf-8'");
-            System.exit(1);
-        }
+        this.codeEmbedding = codeEmbeddings;
     }
 
-    public LongVarcharTypeDescriptor getDescEmbedding() {
+    public String getDescEmbedding() {
         return descEmbedding;
     }
 
-    public void setDescEmbedding(LongVarcharTypeDescriptor descEmbeddings) {
+    public void setDescEmbedding(String descEmbeddings) {
         this.descEmbedding = descEmbeddings;
     }
 

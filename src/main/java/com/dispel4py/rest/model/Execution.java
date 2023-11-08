@@ -9,16 +9,12 @@ public class Execution implements Serializable {
     Workflow graph;
     String inputCode;
     String workflowCode;
-    Integer process;
     String resources;
-    String args;
     String imports;
 
-    public Execution(Long workflowId, Workflow graph, Integer process, String args, String imports) {
+    public Execution(Long workflowId, Workflow graph, String imports) {
         this.workflowId = workflowId;
         this.graph = graph;
-        this.process = process;
-        this.args = args;
         this.imports = imports;
     }
 
@@ -60,22 +56,6 @@ public class Execution implements Serializable {
 
     public void setInputCode(String inputCode) {
         this.inputCode = inputCode;
-    }
-
-    public void setProcess(Integer process) {
-        this.process = process;
-    }
-
-    public String getArgs() {
-        return args;
-    }
-
-    public void setArgs(String args) {
-        this.args = args;
-    }
-
-    public Integer getProcess() {
-        return process;
     }
 
     public String getResources() {

@@ -15,6 +15,8 @@ To manage permission issues, run:
 ```
 /data/Laminar/dispel4py-server> chmod +x gradlew
 ```
+To configure the required fields, navigate to `/src/main/resources/application.properties` and fill in the required variables
+
 To run the server
 ```
 /data/Laminar/dispel4py-server> ./gradlew bootRun

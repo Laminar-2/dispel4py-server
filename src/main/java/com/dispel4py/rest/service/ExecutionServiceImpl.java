@@ -9,10 +9,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import org.springframework.core.env.Environment;
 
 @Service
 public class ExecutionServiceImpl implements ExecutionService {
     WorkflowService workflowService;
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     public ExecutionServiceImpl(WorkflowService workflowService) {
@@ -60,7 +64,8 @@ public class ExecutionServiceImpl implements ExecutionService {
         System.out.println(e);
 
         //WebClient webClient = WebClient.create("https://executionengined4py.azurewebsites.net");
-        WebClient webClient = WebClient.create("http://localhost:5000");
+        String url = env.getProperty("laminar.execution.url");
+        WebClient webClient = WebClient.create(url);
 
         String result = webClient.post()
                 .uri("/run")

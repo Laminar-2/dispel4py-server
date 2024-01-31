@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping(path = "/execution/{user}")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import org.springframework.core.env.Environment;
+import reactor.core.publisher.Flux;
 
 @Service
 public class ExecutionServiceImpl implements ExecutionService {
@@ -24,7 +25,7 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public String runWorkflow(Execution e, String user) {
+    public Flux<String> runWorkflow(Execution e, String user) {
 
         //e.imports will already be set from client for direct execution
 
@@ -67,12 +68,13 @@ public class ExecutionServiceImpl implements ExecutionService {
         String url = env.getProperty("laminar.execution.url");
         WebClient webClient = WebClient.create(url);
 
-        String result = webClient.post()
+        Flux<String> result = webClient.post()
                 .uri("/run")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(e), Execution.class)
                 .retrieve()
-                .bodyToMono(String.class).block();
+                .bodyToFlux(String.class)
+                //.bodyToMono(String.class).block();
 
         System.out.println(result);
 

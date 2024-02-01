@@ -23,12 +23,12 @@ public class ExecutionController {
         return execService.runWorkflow(e, user);
     }*/
 
-    @RequestMapping(value = "/run", method = RequestMethod.POST)
-    public ResponseEntity<Flux<String>> run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
+    @RequestMapping(value = "/run", method = RequestMethod.POST, produces = APPLICATION_NDJSON_VALUE)
+    public Flux<String> run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
         /*
          * Based on code by micobg at https://stackoverflow.com/q/58668900 
          */
         Flux<String> fluxResponse = execService.runWorkflow(e, user);
-        return new ResponseEntity(fluxResponse, HttpStatus.OK);
+        return fluxResponse;
     }
 }

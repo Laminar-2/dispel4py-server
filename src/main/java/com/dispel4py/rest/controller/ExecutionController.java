@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import org.springframework.http.HttpStatus;
 
+import static org.springframework.http.MediaType.APPLICATION_NDJSON_VALUE;
+
 @RestController
 @RequestMapping(path = "/execution/{user}")
 public class ExecutionController {

@@ -69,7 +69,7 @@ public class ExecutionServiceImpl implements ExecutionService {
         String url = env.getProperty("laminar.execution.url");
         WebClient webClient = WebClient.create(url);
 
-        Flux<String> result = webClient.post()
+        Flux<Response> result = webClient.post()
                 .uri("/run")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(e), Execution.class)

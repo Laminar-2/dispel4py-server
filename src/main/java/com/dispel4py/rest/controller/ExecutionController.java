@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import org.springframework.http.HttpStatus;
 
-import static org.springframework.http.MediaType.APPLICATION_NDJSON_VALUE;
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
 
 @RestController
 @RequestMapping(path = "/execution/{user}")
@@ -25,12 +25,14 @@ public class ExecutionController {
         return execService.runWorkflow(e, user);
     }*/
 
-    @RequestMapping(value = "/run", method = RequestMethod.POST, produces = APPLICATION_NDJSON_VALUE)
+    @RequestMapping(value = "/run", method = RequestMethod.POST, produces = TEXT_EVENT_STREAM_VALUE)
     public Flux<String> run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
         /*
          * Based on code by micobg at https://stackoverflow.com/q/58668900 
          */
+        System.out.println("Started Flux");
         Flux<String> fluxResponse = execService.runWorkflow(e, user);
+        System.out.println("Returning Flux");
         return fluxResponse;
     }
 }

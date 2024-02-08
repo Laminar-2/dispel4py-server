@@ -73,10 +73,12 @@ public class ExecutionServiceImpl implements ExecutionService {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(e), Execution.class)
                 .retrieve()
-                .bodyToFlux(String.class);
+                .bodyToFlux(String.class)
+                .log();
                 //.bodyToMono(String.class).block();
 
         System.out.println(result);
+        result.subscribe(System.out::println);
 
         return result;
 

@@ -1,6 +1,8 @@
 package com.dispel4py.rest.model;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable {
     String response;
 
     public Response(String response) {

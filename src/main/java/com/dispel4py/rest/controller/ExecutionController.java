@@ -2,7 +2,6 @@ package com.dispel4py.rest.controller;
 
 import com.dispel4py.rest.error.EntityNotFoundException;
 import com.dispel4py.rest.model.Execution;
-import com.dispel4py.rest.model.Response;
 import com.dispel4py.rest.service.ExecutionService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -27,12 +26,12 @@ public class ExecutionController {
     }*/
 
     @RequestMapping(value = "/run", method = RequestMethod.POST, produces = TEXT_EVENT_STREAM_VALUE)
-    public Flux<Response> run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
+    public Flux<String> run(@RequestBody Execution e, @PathVariable String user) throws EntityNotFoundException {
         /*
          * Based on code by micobg at https://stackoverflow.com/q/58668900 
          */
         System.out.println("Started Flux");
-        Flux<Response> fluxResponse = execService.runWorkflow(e, user);
+        Flux<String> fluxResponse = execService.runWorkflow(e, user);
         System.out.println("Returning Flux");
         return fluxResponse;
     }

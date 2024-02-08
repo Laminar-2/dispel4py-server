@@ -3,6 +3,7 @@ package com.dispel4py.rest.service;
 import com.dispel4py.rest.model.Execution;
 import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.Workflow;
+import com.dispel4py.rest.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public Flux<String> runWorkflow(Execution e, String user) {
+    public Flux<Response> runWorkflow(Execution e, String user) {
 
         //e.imports will already be set from client for direct execution
 
@@ -73,7 +74,7 @@ public class ExecutionServiceImpl implements ExecutionService {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(e), Execution.class)
                 .retrieve()
-                .bodyToFlux(String.class)
+                .bodyToFlux(Response.class)
                 .log();
                 //.bodyToMono(String.class).block();
 

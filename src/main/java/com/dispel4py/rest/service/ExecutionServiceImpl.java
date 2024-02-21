@@ -4,11 +4,13 @@ import com.dispel4py.rest.model.Execution;
 import com.dispel4py.rest.model.PE;
 import com.dispel4py.rest.model.Workflow;
 import com.dispel4py.rest.model.Response;
+import com.dispel4py.rest.model.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 import org.springframework.core.env.Environment;
 import reactor.core.publisher.Flux;
@@ -23,6 +25,21 @@ public class ExecutionServiceImpl implements ExecutionService {
     @Autowired
     public ExecutionServiceImpl(WorkflowService workflowService) {
         this.workflowService = workflowService;
+    }
+
+    @Override
+    public void sendResources(MultipartFile[] files, String user) {
+        String url = env.getProperty("laminar.execution.url");
+        WebClient webClient = WebClient.create(url);
+
+        MultipartBodyBuilder builder = new MultipartBodyBuilder();
+        builder.part("user", user);
+        builder.part("files", files);
+
+        Mono<Void> result = webClient.put()
+                .body(builder.build())
+                .retrieve()
+                .bodyToMono(Void.class);
     }
 
     @Override

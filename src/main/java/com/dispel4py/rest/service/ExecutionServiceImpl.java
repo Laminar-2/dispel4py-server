@@ -41,6 +41,7 @@ public class ExecutionServiceImpl implements ExecutionService {
         }
 
         Mono<Void> result = webClient.put()
+                .uri("/resource")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(builder.build()))
                 .retrieve()

@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import org.springframework.http.HttpStatus;
 
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
-import static org.springframework.http.MediaType.MUTLIPART_FORM_DATA_VALUE;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 @RestController
 @RequestMapping(path = "/execution/{user}")

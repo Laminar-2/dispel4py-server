@@ -31,9 +31,7 @@ public class ExecutionController {
         /*
          * Based on code by micobg at https://stackoverflow.com/q/58668900 
          */
-        System.out.println("Started Flux");
         Flux<Response> fluxResponse = execService.runWorkflow(e, user);
-        System.out.println("Returning Flux");
         return fluxResponse;
     }
 }

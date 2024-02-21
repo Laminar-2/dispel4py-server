@@ -12,6 +12,7 @@ public class Execution implements Serializable {
     String workflowCode;
     List<String> resources;
     String imports;
+    String user;
 
     public Execution(Long workflowId, Workflow graph, List<String> resources, String imports) {
         this.workflowId = workflowId;
@@ -74,6 +75,14 @@ public class Execution implements Serializable {
 
     public void setImports(String imports) {
         this.imports = imports;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
 

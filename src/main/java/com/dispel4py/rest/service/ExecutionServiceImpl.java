@@ -34,6 +34,8 @@ public class ExecutionServiceImpl implements ExecutionService {
         String workflowName = e.getWorkflowName();
         Workflow wf;
 
+        e.setUser(user);
+
         if (!(workflowId == null)) {
             wf = workflowService.getWorkflowByID(workflowId, user);
             e.setGraph(wf);

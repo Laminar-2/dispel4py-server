@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 import org.springframework.core.env.Environment;
 import reactor.core.publisher.Flux;
+import org.springframework.web.reactive.function.BodyInserters;
+
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 @Service
 public class ExecutionServiceImpl implements ExecutionService {
@@ -33,10 +36,13 @@ public class ExecutionServiceImpl implements ExecutionService {
 
         MultipartBodyBuilder builder = new MultipartBodyBuilder();
         builder.part("user", user);
-        builder.part("files", files);
+        for (MultipartFile file : files) {
+            builder.part("files", file.getResource());
+        }
 
         Mono<Void> result = webClient.put()
-                .body(builder.build())
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(builder.build()))
                 .retrieve()
                 .bodyToMono(Void.class);
     }

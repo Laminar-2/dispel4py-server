@@ -1,6 +1,7 @@
 package com.dispel4py.rest.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Execution implements Serializable {
 
@@ -9,13 +10,14 @@ public class Execution implements Serializable {
     Workflow graph;
     String inputCode;
     String workflowCode;
-    String resources;
+    List<String> resources;
     String imports;
 
-    public Execution(Long workflowId, Workflow graph, String imports) {
+    public Execution(Long workflowId, Workflow graph, List<String> resources, String imports) {
         this.workflowId = workflowId;
         this.graph = graph;
         this.imports = imports;
+        this.resources = resources;
     }
 
     public Long getWorkflowId() {
@@ -58,11 +60,11 @@ public class Execution implements Serializable {
         this.inputCode = inputCode;
     }
 
-    public String getResources() {
+    public List<String> getResources() {
         return resources;
     }
 
-    public void setResources(String resources) {
+    public void setResources(List<String> resources) {
         this.resources = resources;
     }
 

@@ -1,6 +1,7 @@
 FROM gradle:latest as BUILD
 WORKDIR /gradle
 COPY . .
+RUN chmod +x ./gradlew
 RUN ./gradlew build
 
 FROM openjdk:17-jdk-alpine

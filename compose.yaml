@@ -19,7 +19,8 @@ services:
       MYSQL_USER: laminar
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
-    volumes: laminar-db:/var/lib/mysql
+    volumes: 
+      - laminar-db:/var/lib/mysql
 
 volumes:
   laminar-db:

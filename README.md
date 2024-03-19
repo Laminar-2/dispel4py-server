@@ -5,7 +5,7 @@ Open a new terminal with the new `Laminar` directory.
 ```
 Clone the server application repository.
 ```
-/data/Laminar> git clone https://github.com/dispel4pyserverless/dispel4py-server.git
+/data/Laminar> git clone https://github.com/Laminar-2/dispel4py-server.git
 ```
 Enter the server directory.
 ```
@@ -35,22 +35,13 @@ To run the application in a docker container follow these intstructions
 
 Clone the server application repository.
 ```
-/data/Laminar> git clone https://github.com/dispel4pyserverless/dispel4py-server.git
+/data/Laminar> git clone https://github.com/Laminar-2/dispel4py-server.git
 ```
 Enter the server directory.
 ```
 /data/Laminar> cd dispel4py-server
 ```
-Create the docker image:
+Run docker compose to load up the server and database
 ```
-docker build -t restapp .
+docker compose up
 ```
-Check if image has been created:
-```
-docker images
-```
-Run the container with the image created:
-```
-docker run -p 8000:8080 restapp
-```
-The application will now be running. 

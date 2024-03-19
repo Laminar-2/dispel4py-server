@@ -4,7 +4,7 @@ COPY . .
 RUN chmod +x ./gradlew
 RUN ./gradlew build
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17
 
 COPY --from=BUILD /gradle/build/libs/rest-0.0.1-SNAPSHOT.jar app.jar
 

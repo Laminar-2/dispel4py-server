@@ -14,7 +14,7 @@ ARG MYSQL_URL
 ARG EXECUTION_URL
 ARG EXECUTION_PORT
 
-RUN printf "spring.jpa.hibernate.ddl-auto=update\nspring.datasource.url=jdbc:${MYSQL_URL}\nspring.datasource.username=${MYSQL_USER}\nspring.datasource.password=${MYSQL_PASSWORD}\nserver.error.include-message=always\nlaminar.execution.url=http://${EXECUTION_URL}:${EXECUTION_PORT}\nserver.address=0.0.0.0" > application.properties
+RUN printf "spring.jpa.hibernate.ddl-auto=update\nspring.datasource.url=jdbc:${MYSQL_URL}\nspring.datasource.username=${MYSQL_USER}\nspring.datasource.password=${MYSQL_PASSWORD}\nserver.error.include-message=always\nlaminar.execution.url=http://${EXECUTION_URL}:${EXECUTION_PORT}\nserver.address=0.0.0.0\nspring.servlet.multipart.max-file-size=1000MB\nspring.servlet.multipart.max-request-size=1000MB" > application.properties
 
 ENV server.address 0.0.0.0
 
